@@ -1,0 +1,14 @@
+.env
+venv/
+__pycache__/
+*.pyc
+.vscode/
+app_backup.py
+app_backup_before_accounts.py
+check_accounts.py
+create_admin.py
+create_test_accounts.py
+reset_default_passwords.py
+student_import.csv
+filename.py
+import_data.py

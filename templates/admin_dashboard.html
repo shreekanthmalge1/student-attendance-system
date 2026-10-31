@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ session.name }}!</p>
+
+    <div class="stats">
+        <div class="stat-card">
+            <h2>{{ total_students }}</h2>
+            <p>Total Students</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ total_teachers }}</h2>
+            <p>Total Teachers</p>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="{{ url_for('add_student') }}">➕ Add Student</a>
+        <a href="{{ url_for('view_students') }}">👨‍🎓 View Students</a>
+        <a href="{{ url_for('manage_teachers') }}">Manage Teachers</a>
+        <a href="#">📚 Manage Subjects</a>
+        <a href="#">📊 Attendance Reports</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </div>
+
+</div>
+
+</body>
+</html>

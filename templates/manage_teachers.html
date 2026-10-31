@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Teachers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Manage Teachers</h1>
+        <p>Welcome, {{ session.name }}!</p>
+
+        <a href="{{ url_for('admin_dashboard') }}">← Back to Admin Dashboard</a>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p class="success">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <h2>Add Teacher</h2>
+
+        <form method="POST">
+            <label>Teacher Name</label>
+            <input type="text" name="name" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Department</label>
+            <select name="department" required>
+                <option value="">Select Department</option>
+                <option value="AI&DS">AI&DS</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="Mechanical">Mechanical</option>
+            </select>
+
+            <button type="submit">Add Teacher</button>
+        </form>
+
+        <h2>Teacher List</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for teacher in teachers %}
+                <tr>
+                    <td>{{ teacher.name }}</td>
+                    <td>{{ teacher.email }}</td>
+                    <td>{{ teacher.department }}</td>
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('delete_teacher', teacher_id=teacher._id) }}"
+                              onsubmit="return confirm('Delete this teacher?');">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No teachers added yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
